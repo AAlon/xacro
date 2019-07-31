@@ -221,7 +221,8 @@ def _find(resolved, a, args, context):
                 'source_path_to_packages', source_path_to_packages)
         if res is not None:
             return res
-    pkg_path = rp.get_path(args[0])
+    from ament_index_python.packages import get_package_share_directory
+    pkg_path = get_package_share_directory(args[0])
     if path:
         pkg_path = os.path.join(pkg_path, path)
     return before + pkg_path + after
@@ -281,10 +282,8 @@ def _find_resource(resolved, a, args, _context, source_path_to_packages=None):
     # we try to find the specific path in share via catkin
     # which will search in install/devel space and the source folder of the
     # package
-    from catkin.find_in_workspaces import find_in_workspaces
-    paths = find_in_workspaces(
-        ['share'], project=args[0], path=path, first_matching_workspace_only=True,
-        first_match_only=True, source_path_to_packages=source_path_to_packages)
+    from ament_index_python.packages import get_package_share_directory
+    paths = get_package_share_directory(args[0])
     if not paths:
         raise SubstitutionException(
             '$(find-resource pkg path) could not find path [%s]' % a)
@@ -327,6 +326,7 @@ def _get_executable_path(base_path, path):
 def _get_rospack():
 
     global _rospack
+
     """
     if _rospack is None:
         _rospack = rospkg.RosPack()

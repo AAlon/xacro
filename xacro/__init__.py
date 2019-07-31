@@ -23,6 +23,7 @@
 from __future__ import division, print_function
 
 import ast
+import traceback
 from copy import deepcopy
 import glob
 import math
@@ -200,7 +201,7 @@ def eval_extension(s):
         return os.getcwd()
     try:
         # TODO use following when roslaunch will be fully migrated to ROS2.
-        # from roslaunch import substitution_args
+        # from launch_ros import substitutions
         # TODO use this when rospkg will be migrated to ROS2.
         # from rospkg.common import ResourceNotFound
         return resolve_args(s, context=substitution_args_context, resolve_anon=False)
@@ -454,7 +455,6 @@ def process_include(elt, macros, symbols, func):
         except TypeError:
             raise XacroException(
                 'namespaces are supported with in-order option only')
-
     for filename in get_include_files(filename_spec, symbols):
         # extend filestack
         oldstack = push_file(filename)
@@ -1141,6 +1141,7 @@ def main():
         sys.exit(2)
 
     except Exception as e:
+        traceback.print_tb(e)
         msg = unicode(e)
         if not msg:
             msg = repr(e)

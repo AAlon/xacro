@@ -10,6 +10,10 @@ setup(
     version='1.13.4',
     python_requires='>=3',
     packages=find_packages(exclude=['test']),
+    data_files=[
+        ('share/' + package_name + '/resource', ['resource/completion.bash']),
+        ('share/' + package_name + '/resource', ['resource/xacro'])
+    ],
     install_requires=['setuptools'],
     zip_safe=True,
     author='Robert Haschke',
@@ -31,7 +35,7 @@ setup(
     test_suite='test',
     entry_points={
         'console_scripts': [
-            'xacro = resource.xacro:main'
+            'xacro = xacro:main'
         ],
     },
 )
