@@ -278,7 +278,7 @@ def _find_resource(resolved, a, args, _context, source_path_to_packages=None):
         raise SubstitutionException('$(find-resource pkg path) '
                                     'command only accepts two argument [%s]' % a)
     before, after = _split_command(resolved, a)
-    path = _sanitize_path(args[1])
+    # path = _sanitize_path(args[1])
     # we try to find the specific path in share via catkin
     # which will search in install/devel space and the source folder of the
     # package
