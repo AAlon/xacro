@@ -11,6 +11,7 @@ setup(
     python_requires='>=3',
     packages=find_packages(exclude=['test']),
     data_files=[
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name + '/resource', ['resource/completion.bash']),
         ('share/' + package_name + '/resource', ['resource/xacro'])
     ],
