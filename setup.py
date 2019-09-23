@@ -12,7 +12,9 @@ setup(
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/' + package_name + '/resource', ['resource/completion.bash']),
-        ('share/' + package_name + '/resource', ['resource/xacro'])
+        ('share/' + package_name + '/resource', ['resource/xacro']),
+        ('share/' + package_name, ['package.xml']),
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name])
     ],
     install_requires=['setuptools'],
     zip_safe=True,
